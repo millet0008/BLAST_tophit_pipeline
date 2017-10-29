@@ -20,7 +20,7 @@ def search_maxmatch(inpass):
     B = out.values()
     for i in B:
         entry = str(i)[1:-1]
-        a = 'blastdbcmd -db /research/NCBI_DB/blastdb/nt -entry ' + entry + ' -outfmt "%t" >> outname '
+        a = 'blastdbcmd -db /research/NCBI_DB/blastdb/nt -entry ' + entry + ' -outfmt "%t" >> ' + outname
         os.system(a)
 
     f.close()
