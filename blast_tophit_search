@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+import os
+import sys
+from optparse import OptionParser
+
+def search_maxmatch(inpass):
+    out = {}
+    with open(inpass, 'r') as infile:
+         for line in infile:
+             temp = line.split('\t')
+             if temp[0] not in out.keys():
+                out[temp[0]] = []
+                out[temp[0]].append(temp[1])
+             else:
+                pass
+    f = open(inpass)
+    name = f.name.split('\\')[-1].split(".")[0]
+    outname = name + '_output'
+    op = open(outname,'a')
+    B = out.values()
+    for i in B:
+        entry = str(i)[1:-1]
+        a = 'blastdbcmd -db /research/NCBI_DB/blastdb/nt -entry ' + entry + ' -outfmt "%t" >> outname '
+        os.system(a)
+
+    f.close()
+    op.close()
+
+def main():
+    parser = OptionParser()
+    parser.add_option("-f","--file", dest="inpass", help="provide input file", metavar="FILE")
+    (options, args) = parser.parse_args()
+    #inpass = sys.argv[1]
+    search_maxmatch(options.inpass)
+
+if __name__ == "__main__":
+    main()
