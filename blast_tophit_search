@@ -27,10 +27,12 @@ def search_maxmatch(inpass):
     op.close()
 
 def main():
+    usage = "usage: %prog [options] arg"
     parser = OptionParser()
     parser.add_option("-f","--file", dest="inpass", help="provide input file", metavar="FILE")
     (options, args) = parser.parse_args()
-    #inpass = sys.argv[1]
+    if not options.inpass:
+        parser.error("Provide the filename with -f or --file option.")
     search_maxmatch(options.inpass)
 
 if __name__ == "__main__":
